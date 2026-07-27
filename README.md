@@ -69,6 +69,20 @@ Todos os experimentos rodam em ambiente isolado. Veja **[lab/setup.md](lab/setup
 - [ ] Estudo: App-Bound Encryption (Chrome 127+)
 - [ ] Matriz de resultados: técnica × hardening × telemetria
 
+## Visualizações
+
+<p align="center">
+  <img src="docs/assets/attack-coverage.png" alt="Cobertura MITRE ATT&CK por módulo" width="70%">
+</p>
+
+<p align="center">
+  <img src="docs/assets/hardening-matrix.png" alt="Matriz técnica × hardening" width="90%">
+</p>
+
+<p align="center">
+  <img src="docs/assets/roadmap-status.png" alt="Status do roadmap" width="45%">
+</p>
+
 ## Referências
 
 - [MITRE ATT&CK — Credential Access (TA0006)](https://attack.mitre.org/tactics/TA0006/)
