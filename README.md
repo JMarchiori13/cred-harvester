@@ -62,7 +62,7 @@ Todos os experimentos rodam em ambiente isolado. Veja **[lab/setup.md](lab/setup
 
 - [x] Scaffold do repositório + disclaimers
 - [x] Notas de pesquisa dos 4 módulos
-- [ ] Guia de setup do laboratório
+- [x] Guia de setup do laboratório
 - [ ] PoC: dump de LSASS via `MiniDumpWriteDump` (lab)
 - [ ] PoC: parsing offline de SAM/SYSTEM
 - [ ] PoC: leitura de Login Data Chromium (pré-v20)
