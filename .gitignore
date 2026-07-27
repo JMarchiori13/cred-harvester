@@ -1,0 +1,41 @@
+# Binaries / build output
+*.exe
+*.dll
+*.sys
+*.bin
+*.dmp
+*.dump
+*.lsass.*
+minidump*
+
+# Extracted artifacts — nunca commitar credenciais, mesmo de lab
+*.kirbi
+*.ccache
+masterkeys/
+output/
+loot/
+secrets/
+
+# C / Visual Studio
+.vs/
+x64/
+Debug/
+Release/
+*.obj
+*.pdb
+*.ilk
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Rust
+target/
+
+# Editors / OS
+.idea/
+.vscode/
+Thumbs.db
+Desktop.ini
