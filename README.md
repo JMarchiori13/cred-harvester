@@ -6,92 +6,92 @@
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 > **⚠️ Disclaimer**
-> Este repositório é um projeto de **pesquisa em segurança ofensiva** para uso exclusivo em **laboratórios isolados** e **operações autorizadas** (red team engagements com escopo contratual e Rules of Engagement assinados). O uso de qualquer técnica aqui documentada contra sistemas sem autorização explícita é crime (Lei nº 12.737/2012 — Brasil; CFAA — EUA; legislação equivalente em outras jurisdições). O autor não se responsabiliza por uso indevido.
+> This repository is an **offensive security research** project intended exclusively for **isolated labs** and **authorized operations** (red team engagements with contractual scope and signed Rules of Engagement). Using any technique documented here against systems without explicit authorization is a crime (Brazil — Lei nº 12.737/2012; United States — CFAA; equivalent legislation in other jurisdictions). The author assumes no liability for misuse.
 
-## Objetivo
+## Objective
 
-Estudo estruturado das técnicas de **Credential Access** ([MITRE ATT&CK TA0006](https://attack.mitre.org/tactics/TA0006/)) em ambientes Windows, com notas de pesquisa, PoCs de laboratório e experimentos documentados por módulo.
+A structured study of **Credential Access** techniques ([MITRE ATT&CK TA0006](https://attack.mitre.org/tactics/TA0006/)) on Windows environments, with research notes, lab PoCs, and documented experiments organized by module.
 
-## Índice
+## Table of Contents
 
-- [Estrutura do projeto](#estrutura-do-projeto)
-- [Módulos](#módulos)
-- [Laboratório](#laboratório)
+- [Project structure](#project-structure)
+- [Modules](#modules)
+- [Lab](#lab)
 - [Roadmap](#roadmap)
-- [Referências](#referências)
+- [References](#references)
 
-## Estrutura do projeto
+## Project structure
 
 ```
 cred-harvester/
-├── docs/                    # Notas de pesquisa por técnica
-│   ├── lsass-dumping.md     # T1003.001 — métodos de dump de LSASS
-│   ├── dpapi.md             # T1555.004 — DPAPI masterkeys e blobs
-│   ├── browser-stores.md    # T1555.003 — credential stores de navegadores
-│   └── sam-offline.md       # T1003.002 — extração offline de SAM/SYSTEM
-├── src/                     # PoCs de laboratório (ver README de cada módulo)
+├── docs/                    # Research notes per technique
+│   ├── lsass-dumping.md     # T1003.001 — LSASS dump methods
+│   ├── dpapi.md             # T1555.004 — DPAPI masterkeys and blobs
+│   ├── browser-stores.md    # T1555.003 — browser credential stores
+│   └── sam-offline.md       # T1003.002 — offline SAM/SYSTEM extraction
+├── src/                     # Lab PoCs (see each module's README)
 │   ├── lsass/
 │   ├── dpapi/
 │   ├── browsers/
 │   └── sam/
-├── lab/                     # Setup e hardening do ambiente de testes
+├── lab/                     # Test environment setup and hardening
 │   └── setup.md
 ├── CONTRIBUTING.md
 └── LICENSE
 ```
 
-## Módulos
+## Modules
 
-| Módulo | ATT&CK | Descrição | Status |
+| Module | ATT&CK | Description | Status |
 |---|---|---|---|
-| [`lsass`](src/lsass/) | T1003.001 | Comparação de métodos: `MiniDumpWriteDump`, `comsvcs.dll`, handles via syscalls | 📋 planejado |
-| [`dpapi`](src/dpapi/) | T1555.004 | Estrutura de masterkeys, descriptografia em contexto de usuário/máquina | 📋 planejado |
-| [`browsers`](src/browsers/) | T1555.003 | Login Data (Chromium, incl. App-Bound/v20), `logins.json` (Firefox) | 📋 planejado |
-| [`sam`](src/sam/) | T1003.002 | Parsing offline de hives SAM/SYSTEM/SECURITY | 📋 planejado |
+| [`lsass`](src/lsass/) | T1003.001 | Method comparison: `MiniDumpWriteDump`, `comsvcs.dll`, syscall-based handles | 📋 planned |
+| [`dpapi`](src/dpapi/) | T1555.004 | Masterkey structure, decryption in user/machine context | 📋 planned |
+| [`browsers`](src/browsers/) | T1555.003 | Login Data (Chromium, incl. App-Bound/v20), `logins.json` (Firefox) | 📋 planned |
+| [`sam`](src/sam/) | T1003.002 | Offline parsing of SAM/SYSTEM/SECURITY hives | 📋 planned |
 
-## Laboratório
+## Lab
 
-Todos os experimentos rodam em ambiente isolado. Veja **[lab/setup.md](lab/setup.md)** para o guia completo:
+All experiments run in an isolated environment. See **[lab/setup.md](lab/setup.md)** for the full guide:
 
-- VM Windows 10/11 em rede host-only (ou sem NIC)
-- Snapshots limpos para rollback entre experimentos
-- Credenciais **fictícias** geradas apenas para teste
-- Matriz de hardening (RunAsPPL, Credential Guard, App-Bound) aplicada em etapas
+- Windows 10/11 VM on a host-only network (or no NIC)
+- Clean snapshots for rollback between experiments
+- **Fictitious** credentials generated for testing only
+- Hardening matrix (RunAsPPL, Credential Guard, App-Bound) applied in stages
 
 ## Roadmap
 
-- [x] Scaffold do repositório + disclaimers
-- [x] Notas de pesquisa dos 4 módulos
-- [x] Guia de setup do laboratório
-- [ ] PoC: dump de LSASS via `MiniDumpWriteDump` (lab)
-- [ ] PoC: parsing offline de SAM/SYSTEM
-- [ ] PoC: leitura de Login Data Chromium (pré-v20)
-- [ ] Estudo: App-Bound Encryption (Chrome 127+)
-- [ ] Matriz de resultados: técnica × hardening × telemetria
+- [x] Repository scaffold + disclaimers
+- [x] Research notes for all 4 modules
+- [x] Lab setup guide
+- [ ] PoC: LSASS dump via `MiniDumpWriteDump` (lab)
+- [ ] PoC: offline SAM/SYSTEM parsing
+- [ ] PoC: Chromium Login Data reading (pre-v20)
+- [ ] Study: App-Bound Encryption (Chrome 127+)
+- [ ] Results matrix: technique × hardening × telemetry
 
-## Visualizações
+## Visualizations
 
 <p align="center">
-  <img src="docs/assets/attack-coverage.png" alt="Cobertura MITRE ATT&CK por módulo" width="70%">
+  <img src="docs/assets/attack-coverage.png" alt="MITRE ATT&CK coverage by module" width="70%">
 </p>
 
 <p align="center">
-  <img src="docs/assets/hardening-matrix.png" alt="Matriz técnica × hardening" width="90%">
+  <img src="docs/assets/hardening-matrix.png" alt="Technique × hardening matrix" width="90%">
 </p>
 
 <p align="center">
-  <img src="docs/assets/roadmap-status.png" alt="Status do roadmap" width="45%">
+  <img src="docs/assets/roadmap-status.png" alt="Roadmap status" width="45%">
 </p>
 
-## Referências
+## References
 
 - [MITRE ATT&CK — Credential Access (TA0006)](https://attack.mitre.org/tactics/TA0006/)
-- [impacket](https://github.com/fortra/impacket) — `secretsdump.py` (parsing offline)
-- [pypykatz](https://github.com/skelsec/pypykatz) — implementação Python do Mimikatz
+- [impacket](https://github.com/fortra/impacket) — `secretsdump.py` (offline parsing)
+- [pypykatz](https://github.com/skelsec/pypykatz) — Python implementation of Mimikatz
 - [SharpDPAPI](https://github.com/GhostPack/SharpDPAPI) / [DonPAPI](https://github.com/login-securite/DonPAPI)
 - [Mimikatz](https://github.com/gentilkiwi/mimikatz) — Benjamin Delpy
 - MS Learn — [DPAPI](https://learn.microsoft.com/en-us/dotnet/standard/security/how-to-use-data-protection), LSA Protection, Credential Guard
 
 ## License
 
-MIT — veja [LICENSE](LICENSE). O disclaimer acima permanece válido independentemente da licença.
+MIT — see [LICENSE](LICENSE). The disclaimer above remains in effect regardless of the license.

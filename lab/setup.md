@@ -1,8 +1,8 @@
-# Setup do Laboratório
+# Lab Setup
 
-Ambiente de referência para todos os experimentos deste repositório. **Nenhum experimento deve rodar fora deste isolamento.**
+Reference environment for every experiment in this repository. **No experiment should run outside this isolation.**
 
-## Topologia
+## Topology
 
 ```
 ┌─────────────────────────────────────────┐
@@ -12,42 +12,42 @@ Ambiente de referência para todos os experimentos deste repositório. **Nenhum 
 │  ┌───────────────┐   ┌───────────────┐  │
 │  │  Win 11 VM    │   │  Win Server   │  │
 │  │  (target)     │   │  2022 DC      │  │
-│  │               │   │  (opcional)   │  │
+│  │               │   │  (optional)   │  │
 │  └───────┬───────┘   └───────┬───────┘  │
 │          └──── host-only ────┘          │
-│              (sem NAT/bridge)           │
+│              (no NAT/bridge)            │
 └─────────────────────────────────────────┘
 ```
 
-## VM alvo (Windows 10/11)
+## Target VM (Windows 10/11)
 
-| Item | Configuração |
+| Item | Configuration |
 |---|---|
-| Rede | Host-only ou NIC desabilitada |
-| Snapshots | `clean-base` (pós-install), `creds-seeded` (credenciais fictícias), um por nível de hardening |
-| Usuários | `labuser1` (admin local), `labuser2` (standard) — senhas fictícias documentadas no vault do lab, nunca no repo |
-| Dados de teste | Logins salvos em navegador apontando para sites de teste (ex.: httpbin local), credenciais RDP/samba fictícias |
+| Network | Host-only or NIC disabled |
+| Snapshots | `clean-base` (post-install), `creds-seeded` (fictitious credentials), one per hardening stage |
+| Users | `labuser1` (local admin), `labuser2` (standard) — fictitious passwords documented in the lab vault, never in the repo |
+| Test data | Saved browser logins pointing to test sites (e.g., local httpbin), fictitious RDP/SMB credentials |
 
-## Matriz de hardening (experimentos em etapas)
+## Hardening matrix (staged experiments)
 
-| Estágio | Configuração | O que valida |
+| Stage | Configuration | What it validates |
 |---|---|---|
-| 0 | Baseline, sem proteções | Funcionamento básico da técnica |
-| 1 | RunAsPPL (`HKLM\SYSTEM\...\Lsa\RunAsPPL=1`) | Bloqueio de acesso ao LSASS por não-PPL |
-| 2 | Credential Guard (VBS) | Isolamento de segredos no LSAIso |
-| 3 | WDigest desabilitado + LSA Protection | Redução de material em texto claro |
-| 4 | Chrome 127+ | App-Bound Encryption em browser stores |
+| 0 | Baseline, no protections | Basic technique functionality |
+| 1 | RunAsPPL (`HKLM\SYSTEM\...\Lsa\RunAsPPL=1`) | Blocking of LSASS access by non-PPL processes |
+| 2 | Credential Guard (VBS) | Secret isolation in LSAIso |
+| 3 | WDigest disabled + LSA Protection | Reduction of cleartext material |
+| 4 | Chrome 127+ | App-Bound Encryption in browser stores |
 
-## Ferramentas do lab
+## Lab tooling
 
-- **Sysmon** (config SwiftOnSecurity ou olafhartong) — telemetria para comparar ruído de cada técnica
-- **Process Monitor / Process Explorer** — validação de handles e acessos
-- **Wireshark** (host-only) — confirmar que nada sai da rede
-- Editor de registro, `vssadmin`, `esentutl` — nativos
+- **Sysmon** (SwiftOnSecurity or olafhartong config) — telemetry to compare the noise of each technique
+- **Process Monitor / Process Explorer** — handle and access validation
+- **Wireshark** (host-only) — confirm nothing leaves the network
+- Registry editor, `vssadmin`, `esentutl` — built-in
 
-## Procedimento por experimento
+## Per-experiment procedure
 
-1. Restaurar snapshot apropriado ao estágio de hardening
-2. Executar a PoC, gravar resultado + telemetria gerada
-3. Documentar em `docs/` (comportamento observado × esperado)
-4. Restaurar snapshot — nunca reutilizar VM "sujada"
+1. Restore the snapshot matching the hardening stage
+2. Run the PoC, record the result + generated telemetry
+3. Document in `docs/` (observed vs. expected behavior)
+4. Restore the snapshot — never reuse a "dirty" VM

@@ -1,22 +1,22 @@
-# src/browsers — PoCs de leitura de credential stores de navegadores
+# src/browsers — Browser credential store reading PoCs
 
-📖 Notas de pesquisa: [docs/browser-stores.md](../../docs/browser-stores.md)
+📖 Research notes: [docs/browser-stores.md](../../docs/browser-stores.md)
 
-## Escopo do módulo
+## Module scope
 
-Leitura e parsing dos stores de credenciais de navegadores no lab, com credenciais fictícias salvas pelo próprio pesquisador.
+Reading and parsing browser credential stores in the lab, using fictitious credentials saved by the researcher.
 
-## Experimentos planejados
+## Planned experiments
 
-| # | Experimento | Alvo |
+| # | Experiment | Target |
 |---|---|---|
-| B1 | Cópia segura do `Login Data` (SQLite, handling de lock/WAL) | Chromium |
-| B2 | Extração da chave `os_crypt.encrypted_key` do `Local State` + unwrap DPAPI (pré-v20) | Chromium ≤126 |
-| B3 | Parsing do `logins.json` + `key4.db` via NSS | Firefox |
-| B4 | Estudo do App-Bound Encryption: comportamento, requisitos, limitações | Chrome 127+ |
+| B1 | Safe copy of `Login Data` (SQLite, lock/WAL handling) | Chromium |
+| B2 | Extraction of `os_crypt.encrypted_key` from `Local State` + DPAPI unwrap (pre-v20) | Chromium ≤126 |
+| B3 | Parsing of `logins.json` + `key4.db` via NSS | Firefox |
+| B4 | App-Bound Encryption study: behavior, requirements, limitations | Chrome 127+ |
 
-## Convenções
+## Conventions
 
-- Linguagem: Python 3 (parsing) — PoCs leem apenas perfis de teste criados no lab
-- Navegadores do lab nunca logados em contas reais
-- Resultados vão para `output/` (gitignored)
+- Language: Python 3 (parsing) — PoCs read only test profiles created in the lab
+- Lab browsers are never signed into real accounts
+- Results go to `output/` (gitignored)

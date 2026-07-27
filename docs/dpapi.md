@@ -1,28 +1,28 @@
 # T1555.004 — Windows DPAPI
 
-Notas de pesquisa sobre a Data Protection API e seus artefatos.
+Research notes on the Data Protection API and its artifacts.
 
-## Arquitetura
+## Architecture
 
-- **Masterkey** (512 bits, rotacionada a cada ~90 dias) derivada da senha do usuário (contexto de usuário) ou da senha da máquina (contexto de sistema, via DPAPI_SYSTEM LSA secret)
-- Armazenadas em `%APPDATA%\Microsoft\Protect\{SID}\` (usuário) e `%WINDIR%\System32\Microsoft\Protect\` (máquina)
-- Blobs DPAPI contêm GUID da masterkey, salt, HMAC e dados cifrados (3DES/AES)
+- **Masterkey** (512 bits, rotated every ~90 days) derived from the user's password (user context) or the machine password (system context, via the DPAPI_SYSTEM LSA secret)
+- Stored in `%APPDATA%\Microsoft\Protect\{SID}\` (user) and `%WINDIR%\System32\Microsoft\Protect\` (machine)
+- DPAPI blobs contain the masterkey GUID, salt, HMAC, and encrypted data (3DES/AES)
 
-## Superfícies de ataque documentadas
+## Documented attack surfaces
 
-| Cenário | Requisito |
+| Scenario | Requirement |
 |---|---|
-| Usuário logado | `CryptUnprotectData` no contexto do próprio usuário |
-| Offline, senha conhecida | Derivação da masterkey a partir do hash da senha |
-| Offline, DPAPI_SYSTEM | Backup keys do domain controller (domínio) |
+| Logged-in user | `CryptUnprotectData` in the user's own context |
+| Offline, known password | Masterkey derivation from the password hash |
+| Offline, DPAPI_SYSTEM | Domain controller backup keys (domain) |
 
-## Onde DPAPI aparece
+## Where DPAPI shows up
 
-- Cookies e senhas de navegadores Chromium (chave AES embrulhada em DPAPI)
+- Chromium browser cookies and passwords (AES key wrapped in DPAPI)
 - Credential Manager / Vault
-- Chaves privadas de certificados, Wi-Fi profiles, RDP saved credentials
+- Certificate private keys, Wi-Fi profiles, saved RDP credentials
 
-## Referências públicas
+## Public references
 
 - SharpDPAPI (harmj0y), DonPAPI, pypykatz
-- "DPAPI in depth" — posts da comunidade (SpecterOps, eladshamir)
+- "DPAPI in depth" — community posts (SpecterOps, eladshamir)

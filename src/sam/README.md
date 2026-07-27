@@ -1,21 +1,21 @@
-# src/sam — Parsing offline de hives SAM/SYSTEM/SECURITY
+# src/sam — Offline parsing of SAM/SYSTEM/SECURITY hives
 
-📖 Notas de pesquisa: [docs/sam-offline.md](../../docs/sam-offline.md)
+📖 Research notes: [docs/sam-offline.md](../../docs/sam-offline.md)
 
-## Escopo do módulo
+## Module scope
 
-Parsing **offline** dos registry hives do lab. Este módulo não interage com o sistema vivo — opera sobre cópias dos hives obtidas via Volume Shadow Copy ou `reg save` no lab.
+**Offline** parsing of the lab's registry hives. This module never touches a live system — it operates on hive copies obtained via Volume Shadow Copy or `reg save` in the lab.
 
-## Experimentos planejados
+## Planned experiments
 
-| # | Experimento | Artefato |
+| # | Experiment | Artifact |
 |---|---|---|
-| S1 | Obtenção das cópias: `vssadmin` + cópia do shadow, e `reg save` (SeBackupPrivilege) | SAM, SYSTEM, SECURITY |
-| S2 | Extração da BootKey do hive SYSTEM | SYSTEM |
-| S3 | Parser da estrutura SAM (F-value, V-value, RID) — referência: impacket | SAM |
-| S4 | Enumeração de LSA secrets e cached credentials (estrutura, sem crack) | SECURITY |
+| S1 | Obtaining the copies: `vssadmin` + shadow copy, and `reg save` (SeBackupPrivilege) | SAM, SYSTEM, SECURITY |
+| S2 | BootKey extraction from the SYSTEM hive | SYSTEM |
+| S3 | SAM structure parser (F-value, V-value, RID) — reference: impacket | SAM |
+| S4 | LSA secrets and cached credentials enumeration (structure, no cracking) | SECURITY |
 
-## Convenções
+## Conventions
 
-- Linguagem: Python 3 — impacket como referência de implementação, mas com código próprio documentado linha a linha para fins didáticos
-- Hives copiados para `lab/hives/` ficam **fora do git** (`.gitignore`)
+- Language: Python 3 — impacket as implementation reference, but with original code documented line by line for educational purposes
+- Hives copied to `lab/hives/` stay **out of git** (`.gitignore`)

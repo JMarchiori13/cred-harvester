@@ -1,22 +1,22 @@
-# src/lsass — PoCs de acesso à memória do LSASS
+# src/lsass — LSASS memory access PoCs
 
-📖 Notas de pesquisa: [docs/lsass-dumping.md](../../docs/lsass-dumping.md)
+📖 Research notes: [docs/lsass-dumping.md](../../docs/lsass-dumping.md)
 
-## Escopo do módulo
+## Module scope
 
-Implementações de laboratório comparando métodos de obtenção de um dump de memória do `lsass.exe`. O foco é a **obtenção do dump** — parsing das credenciais fica por conta de ferramentas open source (pypykatz, Mimikatz) apontadas no dump.
+Lab implementations comparing methods for obtaining an `lsass.exe` memory dump. The focus is **obtaining the dump** — credential parsing is delegated to open source tools (pypykatz, Mimikatz) pointed at the dump.
 
-## Experimentos planejados
+## Planned experiments
 
-| # | Experimento | Pré-requisito | Estágio de hardening |
+| # | Experiment | Prerequisite | Hardening stage |
 |---|---|---|---|
 | L1 | `MiniDumpWriteDump` via dbghelp.dll | `SeDebugPrivilege` | 0–1 |
 | L2 | `comsvcs.dll!MiniDump` via rundll32 (LOLBin) | `SeDebugPrivilege` | 0–1 |
-| L3 | Abertura de handle via direct syscalls | `SeDebugPrivilege` | 0–1 (comparar telemetria) |
-| L4 | Comportamento com RunAsPPL ativo | — | 1 (documentar falhas) |
+| L3 | Handle opening via direct syscalls | `SeDebugPrivilege` | 0–1 (compare telemetry) |
+| L4 | Behavior with RunAsPPL enabled | — | 1 (document failures) |
 
-## Convenções
+## Conventions
 
-- Linguagem: C (MSVC) — builds em `x64/Release` não são commitadas
-- Cada PoC imprime verbosamente cada etapa (abertura de handle, leitura, escrita do dump)
-- Dumps vão para `output/` (gitignored) e são **descartados após o experimento**
+- Language: C (MSVC) — `x64/Release` builds are not committed
+- Each PoC verbosely prints every step (handle opening, read, dump write)
+- Dumps go to `output/` (gitignored) and are **discarded after the experiment**

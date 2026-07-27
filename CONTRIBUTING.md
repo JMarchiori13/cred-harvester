@@ -1,22 +1,22 @@
-# Contribuindo
+# Contributing
 
-Contribuições são bem-vindas **dentro do escopo do projeto**: pesquisa de credential access documentada, PoCs de laboratório e correções nas notas técnicas.
+Contributions are welcome **within the project scope**: documented credential access research, lab PoCs, and fixes to the technical notes.
 
-## Regras
+## Rules
 
-1. **Somente material de laboratório.** Nada de credenciais reais, dumps de sistemas de produção ou dados de terceiros — nem anonimizados.
-2. **Toda PoC precisa de doc.** Cada implementação em `src/` deve vir acompanhada de nota em `docs/` explicando a técnica, pré-requisitos e comportamento esperado.
-3. **Sem código pronto para operação ofensiva.** PoCs devem ser didáticas: logging verboso, artefatos visíveis, sem ofuscação ou evasão de AV.
-4. **Não commite artefatos sensíveis.** O `.gitignore` já cobre dumps, tíquetes e chaves — respeite-o.
+1. **Lab material only.** No real credentials, no dumps from production systems, no third-party data — not even anonymized.
+2. **Every PoC needs documentation.** Each implementation in `src/` must ship with a note in `docs/` explaining the technique, prerequisites, and expected behavior.
+3. **No operation-ready offensive code.** PoCs must be educational: verbose logging, visible artifacts, no obfuscation or AV evasion.
+4. **Do not commit sensitive artifacts.** The `.gitignore` already covers dumps, tickets, and keys — respect it.
 
-## Processo
+## Process
 
-1. Abra uma issue descrevendo a técnica/módulo
-2. Fork → branch `feat/<modulo>-<tecnica>`
-3. PR com referência à issue e resultado do experimento de lab
+1. Open an issue describing the technique/module
+2. Fork → branch `feat/<module>-<technique>`
+3. PR referencing the issue, including the lab experiment result
 
-## Padrões
+## Standards
 
-- Notas em português ou inglês (mantenha consistência dentro do arquivo)
-- Técnicas mapeadas para MITRE ATT&CK (técnica + sub-técnica)
-- Tabelas para comparação de métodos
+- Notes in English (keep it consistent within each file)
+- Techniques mapped to MITRE ATT&CK (technique + sub-technique)
+- Tables for method comparisons

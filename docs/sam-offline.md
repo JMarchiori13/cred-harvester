@@ -1,28 +1,28 @@
 # T1003.002 — SAM / SECURITY Hives Offline
 
-Notas de pesquisa sobre extração offline de credenciais locais.
+Research notes on offline extraction of local credentials.
 
-## Artefatos
+## Artifacts
 
-| Hive | Caminho | Conteúdo |
+| Hive | Path | Contents |
 |---|---|---|
-| SAM | `%WINDIR%\System32\config\SAM` | Hashes NTLM de contas locais |
-| SYSTEM | `%WINDIR%\System32\config\SYSTEM` | BootKey/SysKey — necessária para decifrar o SAM |
+| SAM | `%WINDIR%\System32\config\SAM` | NTLM hashes of local accounts |
+| SYSTEM | `%WINDIR%\System32\config\SYSTEM` | BootKey/SysKey — required to decrypt the SAM |
 | SECURITY | `%WINDIR%\System32\config\SECURITY` | LSA secrets, cached domain credentials (MSCASHv2) |
 
-## Fluxo conceitual
+## Conceptual flow
 
-1. Obter cópia dos hives — Volume Shadow Copy, boot offline, ou backup de registro (`reg save`, requer `SeBackupPrivilege`)
-2. Extrair BootKey do hive SYSTEM
-3. Decifrar estruturas do SAM (F-value, RID-encrypted hashes)
-4. Para cached credentials: extrair NL$KM do SECURITY e decifrar MSCASHv2 (PBKDF2, lento de quebrar)
+1. Obtain copies of the hives — Volume Shadow Copy, offline boot, or registry backup (`reg save`, requires `SeBackupPrivilege`)
+2. Extract the BootKey from the SYSTEM hive
+3. Decrypt SAM structures (F-value, RID-encrypted hashes)
+4. For cached credentials: extract NL$KM from SECURITY and decrypt MSCASHv2 (PBKDF2, slow to crack)
 
-## Proteções relevantes
+## Relevant protections
 
-- Windows 11 22H2+ / Server 2025: desabilitação progressiva de NTLMv1 e mudanças no armazenamento
-- Virtualization-Based Security pode proteger LSA secrets
+- Windows 11 22H2+ / Server 2025: progressive NTLMv1 deprecation and storage changes
+- Virtualization-Based Security can protect LSA secrets
 
-## Referências públicas
+## Public references
 
-- impacket `secretsdump.py` (parsing offline completo, open source)
-- Documentação do formato SAM: "The Windows SAM registry file format"
+- impacket `secretsdump.py` (complete offline parsing, open source)
+- SAM format documentation: "The Windows SAM registry file format"

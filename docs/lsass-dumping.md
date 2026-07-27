@@ -1,29 +1,29 @@
 # T1003.001 — LSASS Memory Dumping
 
-Notas de pesquisa sobre acesso à memória do `lsass.exe` para extração de material de autenticação.
+Research notes on accessing `lsass.exe` memory to extract authentication material.
 
-## Por que o LSASS
+## Why LSASS
 
-O Local Security Authority Subsystem Service mantém em memória credenciais de sessões interativas: hashes NTLM, tíquetes Kerberos, e (em sistemas sem hardening) segredos em texto claro via WDigest.
+The Local Security Authority Subsystem Service keeps credentials from interactive sessions in memory: NTLM hashes, Kerberos tickets, and (on systems without hardening) cleartext secrets via WDigest.
 
-## Métodos documentados
+## Documented methods
 
-| Método | Observações |
+| Method | Notes |
 |---|---|
-| `MiniDumpWriteDump` (dbghelp/dbgcore) | Método clássico; requer `SeDebugPrivilege` e handle com `PROCESS_VM_READ` |
-| `comsvcs.dll` via rundll32 | LOLBin — `MiniDump` export; sem tool externa |
-| Task Manager / ProcDump | Ferramentas legítimas assinadas; dump manual |
-| Direct syscalls | Evita hooks de EDR em `OpenProcess`/`ReadProcessMemory` em user-mode |
-| Handle duplication / fork | Acesso indireto via handles existentes |
+| `MiniDumpWriteDump` (dbghelp/dbgcore) | Classic method; requires `SeDebugPrivilege` and a handle with `PROCESS_VM_READ` |
+| `comsvcs.dll` via rundll32 | LOLBin — `MiniDump` export; no external tooling |
+| Task Manager / ProcDump | Signed legitimate tools; manual dump |
+| Direct syscalls | Avoids EDR user-mode hooks on `OpenProcess`/`ReadProcessMemory` |
+| Handle duplication / fork | Indirect access via existing handles |
 
-## Hardening que afeta a técnica
+## Hardening that affects the technique
 
-- **RunAsPPL** (LSA Protection) — bloqueia abertura de processo por processos não-PPL
-- **Credential Guard** (VBS) — isola segredos no LSAIso
-- **WDigest `UseLogonCredential=0`** — remove segredos em texto claro
+- **RunAsPPL** (LSA Protection) — blocks process opening by non-PPL processes
+- **Credential Guard** (VBS) — isolates secrets in LSAIso
+- **WDigest `UseLogonCredential=0`** — removes cleartext secrets
 
 ## Lab checklist
 
-- [ ] Baseline: VM sem RunAsPPL, credenciais fictícias logadas
-- [ ] Repetir com RunAsPPL habilitado e documentar diferença de comportamento
-- [ ] Comparar telemetria gerada (Sysmon Event ID 10 — ProcessAccess)
+- [ ] Baseline: VM without RunAsPPL, fictitious credentials logged in
+- [ ] Repeat with RunAsPPL enabled and document the behavior difference
+- [ ] Compare generated telemetry (Sysmon Event ID 10 — ProcessAccess)
