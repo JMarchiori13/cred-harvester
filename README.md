@@ -6,13 +6,13 @@
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 > **⚠️ Disclaimer**
-> This repository is an **offensive security research** project intended exclusively for **isolated labs** and **authorized operations** (red team engagements with contractual scope and signed Rules of Engagement). Using any technique documented here against systems without explicit authorization is a crime (Brazil — Lei nº 12.737/2012; United States — CFAA; equivalent legislation in other jurisdictions). The author assumes no liability for misuse.
+> This repository is an **offensive security research** project intended exclusively for **isolated labs** and **authorized operations** (red team engagements with contractual scope and signed Rules of Engagement). Using any technique documented here against systems without explicit authorization is a crime (Brazil: Lei nº 12.737/2012; United States: CFAA; equivalent legislation in other jurisdictions). The author assumes no liability for misuse.
 
 ## Objective
 
-A structured study of **Credential Access** techniques ([MITRE ATT&CK TA0006](https://attack.mitre.org/tactics/TA0006/)) on Windows environments, with research notes, lab PoCs, and documented experiments organized by module.
+A structured study of Credential Access techniques ([MITRE ATT&CK TA0006](https://attack.mitre.org/tactics/TA0006/)) on Windows environments, with research notes, lab PoCs, and documented experiments organized by module.
 
-## Table of Contents
+## Table of contents
 
 - [Project structure](#project-structure)
 - [Modules](#modules)
@@ -51,11 +51,11 @@ cred-harvester/
 
 ## Lab
 
-All experiments run in an isolated environment. See **[lab/setup.md](lab/setup.md)** for the full guide:
+All experiments run in an isolated environment. See [lab/setup.md](lab/setup.md) for the full guide:
 
 - Windows 10/11 VM on a host-only network (or no NIC)
 - Clean snapshots for rollback between experiments
-- **Fictitious** credentials generated for testing only
+- Fictitious credentials generated for testing only
 - Hardening matrix (RunAsPPL, Credential Guard, App-Bound) applied in stages
 
 ## Roadmap
@@ -85,13 +85,13 @@ All experiments run in an isolated environment. See **[lab/setup.md](lab/setup.m
 
 ## References
 
-- [MITRE ATT&CK — Credential Access (TA0006)](https://attack.mitre.org/tactics/TA0006/)
-- [impacket](https://github.com/fortra/impacket) — `secretsdump.py` (offline parsing)
-- [pypykatz](https://github.com/skelsec/pypykatz) — Python implementation of Mimikatz
+- [MITRE ATT&CK: Credential Access (TA0006)](https://attack.mitre.org/tactics/TA0006/)
+- [impacket](https://github.com/fortra/impacket): `secretsdump.py` (offline parsing)
+- [pypykatz](https://github.com/skelsec/pypykatz): Python implementation of Mimikatz
 - [SharpDPAPI](https://github.com/GhostPack/SharpDPAPI) / [DonPAPI](https://github.com/login-securite/DonPAPI)
-- [Mimikatz](https://github.com/gentilkiwi/mimikatz) — Benjamin Delpy
-- MS Learn — [DPAPI](https://learn.microsoft.com/en-us/dotnet/standard/security/how-to-use-data-protection), LSA Protection, Credential Guard
+- [Mimikatz](https://github.com/gentilkiwi/mimikatz): Benjamin Delpy
+- MS Learn: [DPAPI](https://learn.microsoft.com/en-us/dotnet/standard/security/how-to-use-data-protection), LSA Protection, Credential Guard
 
 ## License
 
-MIT — see [LICENSE](LICENSE). The disclaimer above remains in effect regardless of the license.
+MIT. See [LICENSE](LICENSE). The disclaimer above remains in effect regardless of the license.
